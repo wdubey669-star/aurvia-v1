@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurvia – Find the right financial product in the UAE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#060814;--bg2:#0b0f22;--tx:#f2f4fb;--mut:#9ba4be;--bd:rgba(255,255,255,.09);--cd:rgba(255,255,255,.045);--b:#4571f5;--v:#5b4be0;--m:#b01fd0;--g:linear-gradient(120deg,#4571f5,#5b4be0 50%,#b01fd0);--sh:0 30px 60px -24px rgba(69,90,245,.5);color-scheme:dark}
+[data-theme=light]{--bg:#f6f7ff;--bg2:#eceefb;--tx:#0b0f1f;--mut:#5d6580;--bd:rgba(20,30,90,.11);--cd:rgba(255,255,255,.8);--sh:0 30px 60px -28px rgba(69,90,245,.45);color-scheme:light}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:env(safe-area-inset-top,0)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,h5,.sx{font-family:Sora,Inter,sans-serif;letter-spacing:-.035em}
+.w{max-width:1280px;margin:0 auto;padding:0 28px}
+.gt{background:var(--g);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+:focus-visible{outline:2px solid var(--b);outline-offset:3px}
+section{padding:100px 0;position:relative}
+.hd{max-width:760px;margin-bottom:46px}
+.hd.c{margin-inline:auto;text-align:center}
+.ey{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--mut);border:1px solid var(--bd);background:var(--cd);padding:6px 14px 6px 10px;border-radius:99px}
+.ey::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px rgba(91,75,224,.22)}
+h2{font-size:clamp(30px,4.2vw,52px);line-height:1.08;font-weight:800;margin-top:18px}
+.sub{font-size:17px;color:var(--mut);margin-top:16px}
+.sub a{color:var(--b);font-weight:600;border-bottom:1px solid}
+.glass{background:var(--cd);border:1px solid var(--bd);border-radius:30px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.tl{position:relative;overflow:hidden;transition:transform .2s ease-out,border-color .3s,box-shadow .3s;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.tl::before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--mx,50%) var(--my,0),rgba(110,100,255,.2),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.tl:hover{border-color:rgba(120,110,255,.5);box-shadow:var(--sh)}.tl:hover::before{opacity:1}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 26px;border-radius:99px;font:700 15px Inter;color:#fff;background:var(--g);background-size:170% 100%;border:0;cursor:pointer;transition:background-position .5s,box-shadow .3s,transform .2s;box-shadow:0 12px 28px -10px rgba(91,75,224,.8)}
+.btn:hover{background-position:100% 0;box-shadow:0 18px 36px -10px rgba(176,31,208,.7)}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover::after{left:140%}
+.btn.o{background:var(--cd);color:var(--tx);border:1px solid var(--bd);box-shadow:none}
+.btn.o:hover{border-color:var(--b)}
+.btn.l{height:56px;padding:0 32px;font-size:16px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+
+/* loader / progress / cursor */
+#ld{position:fixed;inset:0;background:var(--g);z-index:100;display:grid;place-items:center;transition:transform 1s cubic-bezier(.77,0,.18,1),visibility 0s 1s}
+#ld.x{transform:translateY(-100%);border-radius:0 0 50% 50%;visibility:hidden}
+#ld svg{width:90px;animation:pl 1.1s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.2) rotate(-6deg)}}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;background:var(--g);z-index:90}
+#cur{position:fixed;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;background:radial-gradient(circle,rgba(91,75,224,.16),transparent 65%);pointer-events:none;z-index:0}
+
+/* header */
+header{position:sticky;top:calc(12px + env(safe-area-inset-top,0));z-index:60;height:66px;pointer-events:none}
+header .w{pointer-events:auto;height:100%;max-width:1240px;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);border:1px solid var(--bd);border-radius:99px;padding:0 12px 0 20px;box-shadow:0 16px 40px -20px rgba(69,90,245,.6)}
+.logo{display:flex;align-items:center;gap:10px;font:800 23px Sora;letter-spacing:-.03em}
+.logo svg{width:38px;height:38px;filter:drop-shadow(0 6px 12px rgba(91,75,224,.5));transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.logo:hover svg{transform:rotate(-12deg) scale(1.1)}
+.fin{animation:fn 4s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes fn{50%{transform:rotate(-3deg) translateY(-1px)}}
+nav{display:flex;align-items:center;gap:4px}
+nav a:not(.btn){font-size:15px;font-weight:500;padding:8px 14px;border-radius:99px;color:var(--mut);transition:.25s}
+nav a:not(.btn):hover{color:var(--tx);background:var(--cd)}
+.ib2{width:40px;height:40px;border-radius:50%;border:1px solid var(--bd);background:var(--cd);color:var(--tx);cursor:pointer;font-size:15px;margin:0 3px;transition:.3s}
+.ib2:hover{border-color:var(--b);transform:rotate(20deg)}
+.ls{height:40px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);padding:0 10px;font:600 13px Inter;cursor:pointer;margin:0 3px}
+.ls option{color:#111}
+.bgr{display:none}
+
+/* hero */
+.hero{min-height:100svh;padding:70px 0 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.au i{position:absolute;border-radius:50%;filter:blur(100px);animation:dr 18s ease-in-out infinite alternate;pointer-events:none}
+.au i:nth-child(1){width:620px;height:620px;background:#4571f5;left:-160px;top:-160px;opacity:.5}
+.au i:nth-child(2){width:560px;height:560px;background:#b01fd0;right:-140px;top:60px;opacity:.38;animation-delay:-6s}
+.au i:nth-child(3){width:480px;height:480px;background:#5b4be0;left:35%;bottom:-220px;opacity:.38;animation-delay:-11s}
+@keyframes dr{to{transform:translate(100px,70px) scale(1.15)}}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:60px 60px;-webkit-mask:radial-gradient(ellipse at 50% 35%,#000,transparent 70%);mask:radial-gradient(ellipse at 50% 35%,#000,transparent 70%)}
+.hg{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(40px,6vw,76px);line-height:1.02;font-weight:800;letter-spacing:-.05em}
+.rot{height:1.1em;overflow:hidden;position:relative;margin-top:2px}
+.rot span{position:absolute;left:0;top:0;white-space:nowrap;transition:transform .8s cubic-bezier(.7,0,.2,1),opacity .8s,filter .8s;transform:translateY(100%);opacity:0;filter:blur(8px)}
+.rot span.on{transform:none;opacity:1;filter:none}.rot span.out{transform:translateY(-100%);opacity:0;filter:blur(8px)}
+.hero h3{font:700 clamp(20px,2.2vw,28px)/1.3 Sora;letter-spacing:-.03em;margin-top:12px;color:var(--mut)}
+.hero p.in{font-size:18px;color:var(--mut);margin-top:20px;max-width:540px}
+.fd{margin-top:34px;max-width:580px;padding:10px;border-radius:99px}
+.fd .tb{display:flex;gap:4px;padding:2px 2px 10px;overflow-x:auto}
+.fd .tb button{flex:none;border:0;background:none;color:var(--mut);font:600 14px Inter;padding:9px 16px;border-radius:99px;cursor:pointer;transition:.3s}
+.fd .tb button.on{background:var(--g);color:#fff}
+.fd .go{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg);border:1px solid var(--bd);border-radius:99px;padding:6px 6px 6px 22px;color:var(--mut);font-size:15px}
+.fd{border-radius:34px}
+.dk{position:relative;height:420px;direction:ltr}
+.dc{position:absolute;left:0;top:70px;width:min(100%,450px);height:272px;border-radius:30px;padding:36px 30px;overflow:hidden;cursor:pointer;box-shadow:0 40px 60px -30px rgba(0,0,0,.7);transition:transform .9s cubic-bezier(.65,0,.2,1),opacity .9s,filter .9s;border:1px solid rgba(255,255,255,.25)}
+.dc::after{content:"";position:absolute;width:280px;height:280px;right:-80px;bottom:-110px;border-radius:50%;background:rgba(255,255,255,.14)}
+.dc h4{font:800 28px/1.15 Sora;letter-spacing:-.03em;max-width:290px;position:relative;z-index:1}
+.dc h4 b{color:#a3f06f;display:block}
+.dc small{display:block;margin:10px 0 22px;font-size:14px;max-width:270px;opacity:.9;position:relative;z-index:1}
+.pill{display:inline-block;padding:10px 20px;border-radius:99px;font-weight:700;font-size:14px;background:#a3f06f;color:#14532d;position:relative;z-index:1}
+.dc .em{position:absolute;right:26px;top:50%;font-size:110px;filter:drop-shadow(0 16px 18px rgba(0,0,0,.35));animation:fl 4.5s ease-in-out infinite;z-index:1}
+@keyframes fl{0%,100%{transform:translateY(-50%) rotate(-3deg)}50%{transform:translateY(-58%) rotate(5deg)}}
+.chip{position:absolute;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;font:600 13px Inter;animation:fl2 6s ease-in-out infinite;z-index:5;white-space:nowrap}
+@keyframes fl2{50%{transform:translateY(-16px)}}
+.dots{position:absolute;left:0;bottom:30px;display:flex;gap:7px}
+.dots i{height:6px;width:6px;border-radius:9px;background:var(--bd);cursor:pointer;transition:.4s;position:relative;overflow:hidden}
+.dots i.on{width:38px}.dots i.on::after{content:"";position:absolute;inset:0;background:var(--g);transform-origin:left;animation:pg 4.5s linear}
+@keyframes pg{from{transform:scaleX(0)}}
+.mq{overflow:hidden;position:relative;z-index:2;margin-top:44px;direction:ltr;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq div{display:flex;gap:56px;width:max-content;animation:mqa 36s linear infinite}
+.mq span{font:800 34px Sora;color:transparent;-webkit-text-stroke:1px var(--v);white-space:nowrap}
+@keyframes mqa{to{transform:translateX(-50%)}}
+
+/* dock */
+.dock{display:flex;justify-content:center;align-items:flex-end;gap:14px;flex-wrap:wrap;padding:22px;max-width:1100px;margin:0 auto;border-radius:36px}
+.dk2{width:150px;text-align:center;transform-origin:50% 100%;transition:transform .15s ease-out}
+.dk2 .ic{font-size:44px;height:84px;display:grid;place-items:center;border-radius:24px;background:var(--bg2);border:1px solid var(--bd);margin-bottom:12px}
+.dk2 b{display:block;font-size:14px}.dk2 span{display:block;font-size:12.5px;color:var(--mut);margin-top:4px;line-height:1.35}
+
+/* bento */
+.bn{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.bn .t{padding:30px;display:flex;flex-direction:column;min-height:260px}
+.bn .t:nth-child(1){grid-column:span 2;background:linear-gradient(135deg,rgba(69,113,245,.28),rgba(176,31,208,.2))}
+.bn .t:nth-child(4){grid-column:span 2}
+.bn .t .e{font-size:48px;width:76px;height:76px;border-radius:24px;display:grid;place-items:center;background:var(--bg2);border:1px solid var(--bd);margin-bottom:auto;transition:.5s}
+.bn .t:hover .e{transform:rotate(-10deg) scale(1.1)}
+.bn h5{font-size:21px;margin-top:26px}.bn p{color:var(--mut);margin:8px 0 18px}
+.lk{font-weight:700;color:var(--b)}.lk::after{content:" →";display:inline-block;transition:transform .25s}.lk:hover::after{transform:translateX(6px)}
+
+/* featured cards */
+.fx{display:grid;grid-template-columns:1fr 1fr;gap:26px;padding:26px;align-items:stretch}
+.stg{position:relative;border-radius:24px;background:var(--bg2);border:1px solid var(--bd);min-height:420px;display:grid;place-items:center;overflow:hidden}
+.stg::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:var(--g);filter:blur(90px);opacity:.45;animation:dr 10s ease-in-out infinite alternate}
+.cc{position:relative;width:min(330px,82%);aspect-ratio:1.586;border-radius:22px;box-shadow:0 40px 50px -20px rgba(0,0,0,.6);overflow:hidden;transition:transform .5s;animation:cf 6s ease-in-out infinite}
+@keyframes cf{50%{transform:translateY(-12px) rotate(-2deg)}}
+.cc::before{content:"";position:absolute;left:24px;top:76px;width:44px;height:33px;border-radius:7px;background:linear-gradient(135deg,#f6dc8b,#c9a24a)}
+.cc::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:gl 4s ease-in-out infinite}
+@keyframes gl{60%,100%{left:150%}}
+.cc em{position:absolute;left:24px;top:22px;font:800 17px Sora;color:#fff;font-style:normal}
+.cc i{position:absolute;right:24px;bottom:22px;width:30px;height:30px;border-radius:50%;background:#e8452c;box-shadow:-18px 0 #f5a623}
+.cc s{position:absolute;left:24px;bottom:24px;color:#fff;font:600 14px Inter;letter-spacing:.2em;text-decoration:none;opacity:.9}
+.tabs{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:6px;z-index:3;overflow-x:auto}
+.tabs button{flex:1;min-width:max-content;border:1px solid var(--bd);background:var(--cd);backdrop-filter:blur(10px);color:var(--mut);font:600 13px Inter;padding:10px 12px;border-radius:14px;cursor:pointer;transition:.3s}
+.tabs button.on{background:var(--g);color:#fff;border-color:transparent}
+.dt{padding:12px 8px;display:flex;flex-direction:column;animation:op .5s}
+@keyframes op{from{opacity:0;transform:translateY(12px)}}
+.cat{font-size:13px;font-weight:700;color:var(--b)}
+.dt h3{font-size:30px;margin:8px 0;line-height:1.15}.dt .d{color:var(--mut);min-height:52px}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.st div{padding:16px;border-radius:18px;background:var(--bg2);border:1px solid var(--bd);font-size:13px;color:var(--mut)}
+.st b{display:block;color:var(--tx);font:800 20px Sora;margin-top:4px}
+.of{background:var(--g);background-size:200% 100%;animation:sh 8s linear infinite;color:#fff;border-radius:18px;padding:16px 18px;font-size:13px;font-weight:600}
+.of b{display:block;font:700 17px Sora;margin-top:3px}
+.kr{font-size:13px;color:var(--mut);margin:18px 0}.kr span{display:block;color:var(--tx);font-size:15px;margin-top:4px}
+
+/* preference chips */
+.pf{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.pf a{display:flex;align-items:center;gap:12px;padding:16px 26px;border-radius:99px;font:700 17px Sora;background:var(--cd);border:1px solid var(--bd);transition:.35s cubic-bezier(.2,.8,.2,1)}
+.pf a span{font-size:28px;transition:transform .4s cubic-bezier(.3,1.8,.5,1)}
+.pf a:hover{background:var(--g);color:#fff;transform:translateY(-6px) scale(1.04);border-color:transparent}.pf a:hover span{transform:scale(1.3) rotate(-10deg)}
+
+/* loans */
+.ln{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.mini{display:grid;gap:12px;margin:28px 0}
+.mc{display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:22px;background:var(--cd);border:1px solid var(--bd);transition:.35s}
+.mc:hover{transform:translateX(8px);border-color:var(--v)}
+.mc u{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:var(--bg2);text-decoration:none;font-size:20px}
+.mc b{display:block}.mc span{font-size:14px;color:var(--mut)}
+.cal{padding:32px;position:relative}
+.cal .big{position:absolute;right:20px;top:-34px;font-size:96px;animation:fl2 6s ease-in-out infinite;filter:drop-shadow(0 14px 14px rgba(0,0,0,.4))}
+.dn{display:flex;align-items:center;gap:24px;margin-bottom:10px}
+.dn svg{width:150px;flex:none;transform:rotate(-90deg)}
+.dn circle{fill:none;stroke-width:14;stroke-linecap:round}
+.dn .bk{stroke:var(--bd)}.dn .fg{stroke:url(#gr);transition:stroke-dasharray .5s}
+.dn span{color:var(--mut);font-size:14px}.dn b{display:block;font:800 clamp(30px,4vw,42px) Sora;letter-spacing:-.04em}
+.cal label{display:flex;justify-content:space-between;font-size:14px;margin-top:20px;font-weight:600}
+.cal input{width:100%;accent-color:#7c6cf5;margin-top:8px}
+
+/* banking */
+.bk3{display:grid;grid-template-columns:1fr 380px 1fr;gap:26px;align-items:center}
+.bk3 .p{padding:32px}
+.bk3 h5{font-size:22px;margin:14px 0 8px}.bk3 p{color:var(--mut);margin-bottom:18px}
+.bk3 ul{list-style:none;display:grid;gap:12px;margin-top:16px}
+.bk3 li{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:16px;background:var(--bg2);border:1px solid var(--bd)}
+.bk3 li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--g);color:#fff;font-size:13px;flex:none}
+.pst{position:relative;display:grid;place-items:center;min-height:460px}
+.pst::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:var(--g);filter:blur(80px);opacity:.5;animation:dr 9s ease-in-out infinite alternate}
+.ph{position:relative;width:230px;height:400px;background:#fff;border:8px solid #14141c;border-radius:40px;padding:28px 14px;color:#111;font-size:11px;transform:rotate(-4deg);box-shadow:0 40px 60px -16px rgba(0,0,0,.6);animation:fl2 6s ease-in-out infinite}
+.ph>div{height:84px;border-radius:16px;background:#1b3a8a;color:#fff;padding:12px;margin-top:12px;font-size:10px}.ph>div b{display:block;font-size:16px;margin-top:4px}
+.ph::after{content:"";position:absolute;top:8px;left:50%;width:60px;height:14px;border-radius:9px;background:#14141c;transform:translateX(-50%)}
+
+/* calculators */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cl{display:flex;flex-direction:column;gap:6px;padding:28px;min-height:220px}
+.cl u{width:60px;height:60px;border-radius:20px;background:var(--bg2);border:1px solid var(--bd);display:grid;place-items:center;text-decoration:none;font-size:26px;margin-bottom:auto;transition:.5s}
+.cl:hover u{background:var(--g);transform:rotate(-10deg)}
+.cl b{font:700 19px Sora;margin-top:22px;letter-spacing:-.02em}.cl span{color:var(--mut);font-size:14.5px}
+.cl::after{content:"→";position:absolute;right:24px;top:26px;width:40px;height:40px;border-radius:50%;border:1px solid var(--bd);display:grid;place-items:center;transition:.4s}
+.cl:hover::after{background:var(--g);transform:rotate(-45deg);border-color:transparent}
+
+/* journey */
+.jr{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;padding-top:40px}
+.jr::before{content:"";position:absolute;left:5%;right:5%;top:40px;height:3px;border-radius:3px;background:var(--bd)}
+.jr::after{content:"";position:absolute;left:5%;top:40px;height:3px;border-radius:3px;background:var(--g);width:0;transition:width 2s cubic-bezier(.3,.7,.2,1) .3s}
+.jr.in::after{width:90%}
+.jr>div{position:relative;padding:48px 28px 30px;text-align:center}
+.jr big{position:absolute;left:50%;top:-30px;translate:-50% 0;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--g);color:#fff;font:800 24px Sora;box-shadow:0 0 0 8px var(--bg),0 14px 30px -8px rgba(91,75,224,.8)}
+.jr h5{font-size:21px}.jr h5 em{font-style:normal;color:var(--b)}.jr p{color:var(--mut);margin-top:12px}
+
+/* why */
+.wy{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:18px}
+.wy .f{padding:30px}
+.wy .f u{display:grid;place-items:center;width:54px;height:54px;border-radius:18px;background:var(--bg2);border:1px solid var(--bd);text-decoration:none;font-size:24px;margin-bottom:18px}
+.wy .f b{font:700 18px Sora}.wy .f p{color:var(--mut);margin-top:8px;font-size:15px}
+.wy .c{grid-column:2;grid-row:1/3;display:grid;place-items:center;font-size:190px;background:linear-gradient(160deg,rgba(69,113,245,.3),rgba(176,31,208,.28));border-radius:30px;border:1px solid var(--bd);animation:fl2 5s ease-in-out infinite;filter:drop-shadow(0 30px 30px rgba(91,75,224,.4))}
+
+/* articles */
+.ag{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:18px}
+.ar2{display:flex;overflow:hidden}
+.ar2:first-child{grid-row:1/3;flex-direction:column}
+.ai{display:grid;place-items:center;font-size:70px;min-width:170px;transition:.5s}.ar2:first-child .ai{min-height:260px;font-size:110px}
+.ar2:hover .ai{transform:scale(1.08)}
+.ab{padding:26px}
+.tg{display:inline-block;background:var(--bg2);border:1px solid var(--bd);color:var(--b);font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:99px}
+.ab h5{font-size:19px;line-height:1.3;margin:14px 0 10px}.ab p{font-size:15px;color:var(--mut)}
+
+/* faq */
+.fq{display:grid;grid-template-columns:.8fr 1.4fr;gap:60px;align-items:start}
+.fq .hd{position:sticky;top:110px;margin:0}
+details{background:var(--cd);border:1px solid var(--bd);border-radius:22px;margin-bottom:12px;transition:.3s}
+details[open]{border-color:rgba(120,110,255,.5);box-shadow:var(--sh)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0 24px;min-height:68px;font-weight:700}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font-size:20px;transition:.35s}
+details[open] summary::after{transform:rotate(135deg);background:var(--g);color:#fff}
+details p{padding:0 24px 24px;color:var(--mut);animation:op .4s}
+
+/* cta + footer */
+.cta{padding:70px 40px;text-align:center;border-radius:44px;background:var(--g);background-size:160% 160%;animation:sh2 10s ease infinite;position:relative;overflow:hidden;color:#fff}
+@keyframes sh2{50%{background-position:100% 100%}}
+.cta::before{content:"💎";position:absolute;right:6%;top:10%;font-size:130px;opacity:.25;animation:fl2 6s ease-in-out infinite}
+.cta h2{margin:0 auto;max-width:760px}.cta .row{justify-content:center;margin-top:30px}.cta .btn{background:#fff;color:#1a1060;box-shadow:none}.cta .btn.o{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+footer{padding:80px 0 26px;position:relative;overflow:hidden;border-top:1px solid var(--bd);margin-top:100px;background:var(--bg2)}
+.fg{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.fg h6{font:700 17px Sora;margin-bottom:16px}
+.fg a{display:block;color:var(--mut);font-size:15px;margin-bottom:10px;transition:.25s}
+.fg a:hover{color:var(--b);transform:translateX(5px)}
+.nb{display:flex;justify-content:space-between;align-items:center;margin-top:44px;padding-top:28px;border-top:1px solid var(--bd);gap:20px;flex-wrap:wrap}
+.nl{display:flex;align-items:center;gap:16px}
+.swi{width:56px;height:56px;background:var(--g);border-radius:18px;display:grid;place-items:center;color:#fff;font-size:24px;transform:rotate(-6deg);animation:fl2 5s ease-in-out infinite}
+.nl h5{font-size:17px}
+.nf{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.nf input{height:46px;padding:0 18px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font:14px Inter;width:250px;outline:0}
+.nf input:focus{border-color:var(--v);box-shadow:0 0 0 4px rgba(91,75,224,.2)}
+.si{display:flex;gap:12px}.so span{display:block;font-size:14px;color:var(--mut);margin-bottom:12px}
+.si a{width:42px;height:42px;border-radius:50%;background:var(--cd);border:1px solid var(--bd);display:grid;place-items:center;color:var(--mut);transition:.3s}
+.si a:hover{background:var(--g);color:#fff;transform:translateY(-4px) rotate(-8deg)}
+.bm{margin-top:20px;padding-top:18px;border-top:1px solid var(--bd);font-size:13px;color:var(--mut);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wm{position:absolute;right:0;bottom:-30px;font:800 150px Sora;color:rgba(110,100,255,.07);pointer-events:none;letter-spacing:-.05em}
+#up{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0));width:50px;height:50px;border-radius:50%;border:0;background:var(--g);color:#fff;cursor:pointer;z-index:70;box-shadow:0 14px 30px -8px rgba(91,75,224,.7);opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:.4s}
+#up.v{opacity:1;transform:none;pointer-events:auto}
+#toast{position:fixed;left:50%;bottom:30px;translate:-50% 120px;background:var(--g);color:#fff;padding:14px 26px;border-radius:99px;font-weight:600;z-index:96;transition:translate .5s cubic-bezier(.3,1.5,.5,1)}
+#toast.v{translate:-50% 0}
+#cp{position:fixed;inset:0;z-index:95;background:rgba(5,8,20,.65);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
+#cp.o{display:flex}
+#cp>div{width:min(560px,92vw);background:var(--bg);border:1px solid var(--bd);border-radius:26px;box-shadow:var(--sh);overflow:hidden;animation:op .3s}
+#cp input{width:100%;height:62px;border:0;border-bottom:1px solid var(--bd);background:none;color:var(--tx);font:16px Inter;padding:0 24px;outline:0}
+#cp a{display:block;padding:14px 24px;font-weight:600}#cp a:hover,#cp a.f{background:var(--cd)}
+.rv{opacity:0;transform:translateY(40px) scale(.98);filter:blur(5px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1),filter .9s;transition-delay:calc(var(--i,0)*80ms)}
+.rv.in{opacity:1;transform:none;filter:none}
+html[lang=ur] :where(body,h1,h2,h3,h4,h5,h6,b,span,a,p,button,summary,select,input,label),html[lang=ar] :where(body,h1,h2,h3,h4,h5,h6,b,span,a,p,button,summary,select,input,label){font-family:"Noto Sans Arabic",sans-serif!important;letter-spacing:0!important}
+html[lang=hi] :where(body,h1,h2,h3,h4,h5,h6,b,span,a,p,button,summary,select,input,label){font-family:"Noto Sans Devanagari",sans-serif!important;letter-spacing:0!important}
+@media(max-width:1100px){.hg,.ln,.fx,.fq,.bk3{grid-template-columns:1fr}.bn,.cg{grid-template-columns:1fr 1fr}.bn .t:nth-child(n){grid-column:auto}.bn .t:nth-child(1){grid-column:span 2}.wy{grid-template-columns:1fr 1fr}.wy .c{grid-column:1/3;grid-row:auto;font-size:120px;padding:20px}.ag{grid-template-columns:1fr}.ar2:first-child{grid-row:auto}.fg{grid-template-columns:repeat(3,1fr)}.bgr{display:block}nav{position:fixed;top:calc(90px + env(safe-area-inset-top,0));left:12px;right:12px;flex-direction:column;align-items:stretch;background:var(--bg);border:1px solid var(--bd);border-radius:26px;padding:14px;box-shadow:var(--sh);transform:translateY(-14px);opacity:0;pointer-events:none;transition:.35s}nav.o{transform:none;opacity:1;pointer-events:auto}.fq .hd{position:static}.dk{height:380px}}
+@media(max-width:640px){.w{padding:0 18px}section{padding:64px 0}.bn,.cg,.wy,.jr{grid-template-columns:1fr}.bn .t:nth-child(1){grid-column:auto}.wy .c{grid-column:auto}.jr::before,.jr::after{display:none}.jr>div{padding-top:50px}.fg{grid-template-columns:1fr 1fr}.ar2{flex-direction:column}.dc{padding:28px 22px;height:250px}.dc .em{font-size:70px}.dn{flex-direction:column;align-items:flex-start}.nb{flex-direction:column;align-items:flex-start}.nf input{width:100%}.wm{font-size:70px}.cta{padding:50px 22px}.mq span{font-size:24px}.chip{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.rv{opacity:1;transform:none;filter:none}}
+
+/* =========================================================
+   AURVIA RESPONSIVE EXPERIENCE — desktop / tablet / mobile
+   Original sections, content, colours and interactions retained
+   ========================================================= */
+:root{--page-gutter:clamp(16px,3.2vw,34px)}
+html{scroll-padding-top:100px}
+body{min-width:320px}
+.w{width:100%;padding-inline:var(--page-gutter)}
+img,svg,video{max-width:100%}
+button,a,select,input{touch-action:manipulation}
+button,.btn{ -webkit-tap-highlight-color:transparent }
+section{scroll-margin-top:90px}
+header .w{width:calc(100% - 2*var(--page-gutter))}
+#cur{display:block}
+.dc{will-change:transform}
+.glass,.tl{min-width:0}
+.fx,.ln,.bk3,.fq,.hg,.bn,.cg,.wy,.ag,.fg{min-width:0}
+.fd,.go,.dt,.cal,.p,.f,.cl,.ar2{min-width:0}
+.fd .go span{min-width:0;overflow-wrap:anywhere}
+.btn{white-space:nowrap}
+input,select{max-width:100%}
+
+/* Large desktop: make use of wide screens without stretching text */
+@media(min-width:1440px){
+  .w{max-width:1360px}
+  .hero{min-height:min(900px,100svh)}
+  .hg{gap:clamp(44px,5vw,82px)}
+  .hero h1{font-size:clamp(68px,5.3vw,88px)}
+  .dk{height:460px}
+  .dc{width:min(100%,490px);height:290px}
+  section{padding-block:112px}
+}
+
+/* Tablet landscape and compact laptops */
+@media(max-width:1100px){
+  :root{--page-gutter:26px}
+  .w{max-width:900px}
+  header{top:calc(10px + env(safe-area-inset-top,0));height:62px}
+  header .w{padding-left:18px}
+  nav{z-index:80;max-height:calc(100svh - 120px);overflow:auto}
+  nav a:not(.btn){padding:12px 16px}
+  nav .btn{width:100%}
+  .bgr{display:grid;place-items:center;flex:none}
+  .hg{grid-template-columns:minmax(0,1fr);gap:18px}
+  .hero{min-height:auto;padding:100px 0 36px}
+  .hero .w{max-width:850px}
+  .hero h1{max-width:780px}
+  .hero p.in{max-width:680px}
+  .dk{width:min(100%,650px);height:370px;margin:6px auto 0}
+  .dc{left:50%;width:min(82%,450px);transform-origin:center}
+  .dots{left:50%;translate:-50% 0}
+  .chip{font-size:12px}
+  .fx{gap:22px}
+  .stg{min-height:380px}
+  .bk3{grid-template-columns:minmax(0,1fr) minmax(220px,.8fr);gap:20px}
+  .bk3 .pst{grid-column:1/-1;grid-row:1}
+  .bk3 .p{height:100%}
+  .wy{grid-template-columns:1fr 1fr}
+  .wy .c{grid-column:1/-1;grid-row:auto;min-height:220px}
+  .fq{grid-template-columns:1fr;gap:28px}
+  .fq .hd{position:static}
+  .fg{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* Tablet portrait */
+@media(min-width:641px) and (max-width:900px){
+  :root{--page-gutter:24px}
+  section{padding-block:76px}
+  .hd{margin-bottom:34px}
+  .hd h2,h2{font-size:clamp(32px,5vw,46px)}
+  .bn{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bn .t:nth-child(1),.bn .t:nth-child(4){grid-column:span 2}
+  .cg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jr{gap:14px}
+  .jr>div{padding-inline:18px}
+  .ar2{min-height:190px}
+  .ar2:first-child .ai{min-height:210px}
+  .fg{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .nb{align-items:flex-start}
+}
+
+/* Phones */
+@media(max-width:640px){
+  :root{--page-gutter:17px}
+  html{scroll-padding-top:82px}
+  body{font-size:15px}
+  .w{padding-inline:var(--page-gutter)}
+  header{top:calc(8px + env(safe-area-inset-top,0));height:58px}
+  header .w{width:calc(100% - 2*var(--page-gutter));padding:0 9px 0 14px;border-radius:22px}
+  .logo{font-size:20px;gap:7px}
+  .logo svg{width:32px;height:32px}
+  .ib2{width:42px;height:42px}
+  .bgr{display:grid}
+  nav{top:calc(76px + env(safe-area-inset-top,0));left:var(--page-gutter);right:var(--page-gutter);padding:12px;border-radius:22px}
+  nav a:not(.btn){font-size:15px;padding:12px 14px}
+  nav .ls{width:100%;height:44px;margin:4px 0}
+  nav .ib2{display:inline-grid;place-items:center}
+  nav .btn{height:46px;margin-top:4px}
+  section{padding:58px 0}
+  .hd{margin-bottom:28px}
+  .hd.c{text-align:left}
+  h2,.hd h2{font-size:clamp(29px,8vw,38px);line-height:1.12}
+  .sub{font-size:15px;line-height:1.7;margin-top:13px}
+  .ey{font-size:12px;padding:6px 11px 6px 9px}
+  .hero{min-height:auto;padding:88px 0 26px}
+  .hg{gap:12px}
+  .hero h1{font-size:clamp(37px,10vw,52px);line-height:1.04}
+  .hero h3{font-size:19px;margin-top:10px}
+  .hero p.in{font-size:15px;line-height:1.7;margin-top:14px}
+  .fd{margin-top:22px;padding:9px;border-radius:22px}
+  .fd .tb{padding-bottom:9px;gap:4px}
+  .fd .tb button{font-size:12px;padding:9px 12px}
+  .fd .go{border-radius:16px;padding:7px 7px 7px 13px;font-size:13px}
+  .fd .go .btn{height:42px;padding-inline:15px;font-size:13px}
+  .dk{height:290px;margin-top:14px}
+  .dc{top:36px;width:88%;height:218px;padding:23px 19px;border-radius:23px}
+  .dc h4{font-size:22px;max-width:220px}
+  .dc small{font-size:12px;line-height:1.45;max-width:210px;margin:8px 0 14px}
+  .dc .em{right:15px;font-size:62px}
+  .pill{font-size:12px;padding:8px 13px}
+  .dots{bottom:12px}
+  .mq{margin-top:18px}
+  .mq div{gap:32px}
+  .mq span{font-size:22px}
+  .dock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px;border-radius:24px}
+  .dk2{width:auto;padding:12px 7px;border-radius:18px;background:var(--bg2);border:1px solid var(--bd)}
+  .dk2 .ic{height:58px;width:58px;margin:0 auto 8px;font-size:30px;border-radius:17px}
+  .dk2 b{font-size:12px;line-height:1.35}
+  .dk2 span{font-size:11px;line-height:1.4}
+  .bn,.cg,.wy,.jr{grid-template-columns:minmax(0,1fr);gap:12px}
+  .bn .t,.cl,.wy .f{padding:22px;min-height:unset}
+  .bn .t:nth-child(n){grid-column:auto}
+  .bn .t .e{width:62px;height:62px;font-size:38px;border-radius:19px}
+  .bn h5{font-size:19px;margin-top:20px}
+  .bn p{font-size:14px}
+  .fx{grid-template-columns:minmax(0,1fr);padding:12px;gap:15px;border-radius:24px}
+  .stg{min-height:280px;border-radius:19px}
+  .cc{width:min(290px,82%)}
+  .tabs{left:8px;right:8px;bottom:8px;gap:5px}
+  .tabs button{font-size:11px;padding:9px 11px;border-radius:11px}
+  .dt{padding:8px 5px 5px}
+  .dt h3{font-size:25px}
+  .dt .d{font-size:14px;min-height:0;line-height:1.55}
+  .st{gap:8px;margin:15px 0}
+  .st div{padding:12px;border-radius:14px;font-size:11px}
+  .st b{font-size:17px;overflow-wrap:anywhere}
+  .of{padding:13px 14px;border-radius:15px}
+  .kr{margin:14px 0;font-size:12px}
+  .kr span{font-size:14px;line-height:1.5}
+  .dt .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .dt .row .btn{width:100%;padding:0 10px;font-size:12px}
+  .pf{justify-content:flex-start;gap:9px}
+  .pf a{font-size:13px;padding:11px 14px;gap:8px}
+  .pf a span{font-size:21px}
+  .ln{gap:22px}
+  .mini{gap:9px;margin:20px 0}
+  .mc{padding:13px;border-radius:17px;gap:12px}
+  .mc u{width:40px;height:40px;font-size:18px;border-radius:13px}
+  .mc span{font-size:12px;line-height:1.45}
+  .ln .row{display:grid;grid-template-columns:1fr;gap:9px}
+  .ln .row .btn{width:100%}
+  .cal{padding:21px;border-radius:23px}
+  .cal .big{font-size:62px;right:13px;top:-20px}
+  .dn{flex-direction:row;align-items:center;gap:14px}
+  .dn svg{width:108px}
+  .dn b{font-size:26px}
+  .dn span{font-size:12px}
+  .cal label{font-size:12px;margin-top:16px}
+  .bk3{grid-template-columns:minmax(0,1fr);gap:12px}
+  .bk3 .pst{grid-column:auto;grid-row:auto;min-height:350px}
+  .bk3 .p{padding:22px;border-radius:22px}
+  .ph{transform:rotate(-3deg) scale(.88)}
+  .bk3 h5{font-size:19px}
+  .cl{min-height:170px;gap:5px}
+  .cl u{width:52px;height:52px;font-size:23px}
+  .cl b{font-size:17px;margin-top:17px;padding-right:28px}
+  .cl span{font-size:13px}
+  .jr{padding-top:0;gap:12px}
+  .jr::before,.jr::after{display:none}
+  .jr>div{padding:48px 20px 22px;text-align:left;border-radius:22px}
+  .jr big{left:24px;top:12px;translate:0 0;width:42px;height:42px;font-size:17px;box-shadow:0 0 0 5px var(--bg)}
+  .jr h5{font-size:18px}
+  .jr p{font-size:14px;line-height:1.6}
+  .wy .c{grid-column:auto;grid-row:auto;min-height:170px;font-size:110px;border-radius:23px}
+  .wy .f{border-radius:21px}
+  .wy .f p{font-size:14px;line-height:1.6}
+  .ag{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;gap:12px}
+  .ar2,.ar2:first-child{display:flex;flex-direction:row;min-height:0;border-radius:21px}
+  .ai,.ar2:first-child .ai{min-width:100px;width:100px;min-height:120px;font-size:45px}
+  .ab{padding:15px;min-width:0}
+  .ab h5{font-size:15px;margin:9px 0 7px}
+  .ab p{font-size:12px;line-height:1.5}
+  .tg{font-size:10px;padding:4px 8px}
+  .fq{gap:18px}
+  summary{min-height:62px;padding:0 16px;font-size:14px}
+  details{border-radius:17px}
+  details p{padding:0 16px 18px;font-size:13px;line-height:1.65}
+  .cta{padding:42px 19px;border-radius:26px}
+  .cta h2{font-size:29px}
+  .cta::before{font-size:70px;right:2%;top:2%}
+  .cta .row{display:grid;grid-template-columns:1fr;gap:10px}
+  .cta .row .btn{width:100%}
+  footer{padding:52px 0 22px;margin-top:58px}
+  .fg{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 14px}
+  .fg h6{font-size:14px;margin-bottom:12px}
+  .fg a{font-size:12px;line-height:1.5;margin-bottom:9px}
+  .nb{margin-top:28px;padding-top:22px;flex-direction:column;align-items:stretch;gap:24px}
+  .nl{align-items:flex-start;gap:12px}
+  .swi{width:44px;height:44px;flex:none;font-size:19px;border-radius:14px}
+  .nl h5{font-size:14px;line-height:1.5}
+  .nf{display:grid;grid-template-columns:minmax(0,1fr) auto}
+  .nf input{width:100%;min-width:0;height:44px;padding-inline:13px;font-size:13px}
+  .nf .btn{height:44px;padding-inline:15px;font-size:12px}
+  .so span{font-size:13px}
+  .bm{font-size:11px;margin-top:22px}
+  .wm{font-size:56px;bottom:-10px}
+  #up{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0));width:46px;height:46px}
+  #toast{width:max-content;max-width:calc(100vw - 32px);text-align:center;font-size:13px;padding:12px 18px;bottom:calc(18px + env(safe-area-inset-bottom,0))}
+  #cp{padding:10vh 14px 0}
+  #cp>div{width:100%;border-radius:20px}
+  #cp input{height:56px;font-size:15px;padding-inline:17px}
+  #cp a{padding:13px 17px;font-size:14px}
+  #cur{display:none!important}
+  .tl{transform:none!important}
+}
+
+/* Very small phones */
+@media(max-width:380px){
+  :root{--page-gutter:14px}
+  .logo{font-size:18px}
+  .logo svg{width:29px;height:29px}
+  header .w{padding-left:11px}
+  .ib2{width:39px;height:39px}
+  .hero h1{font-size:36px}
+  .fd .tb button{padding-inline:9px;font-size:11px}
+  .fd .go{font-size:12px}
+  .fd .go .btn{padding-inline:11px;font-size:12px}
+  .dc{width:92%;height:210px;padding:20px 16px}
+  .dc h4{font-size:20px}
+  .dc .em{font-size:52px}
+  .st{grid-template-columns:1fr 1fr}
+  .st div{padding:10px}
+  .st b{font-size:15px}
+  .dt .row{grid-template-columns:1fr}
+  .ar2,.ar2:first-child{flex-direction:column}
+  .ai,.ar2:first-child .ai{width:100%;min-height:110px}
+  .nf{grid-template-columns:1fr}
+  .nf .btn{width:100%}
+}
+
+/* Touch screens: remove hover-only motion and keep controls easy to tap */
+@media(hover:none),(pointer:coarse){
+  .tl{transform:none!important}
+  .tl::before{display:none}
+  .btn:hover{transform:none}
+  .dk2{transform:none!important}
+  .dc{cursor:default}
+  .btn,.ib2,.tabs button,.fd .tb button,.pf a,summary{min-height:44px}
+}
+
+/* Landscape phones */
+@media(max-height:500px) and (orientation:landscape) and (max-width:950px){
+  .hero{padding-top:86px}
+  .dk{height:250px}
+  .dc{top:20px;height:190px}
+  .dots{bottom:5px}
+  nav{max-height:calc(100svh - 90px);top:70px}
+}
+
+/* Respect device safe areas and reduce visual motion when requested */
+@supports(padding:max(0px)){
+  body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+}
+
+</style>
+</head>
+<body>
+<div id="ld"><svg viewBox="0 0 48 48"><use href="#lg"/></svg></div>
+<div id="pb"></div><div id="cur"></div><div id="toast"></div>
+<div id="cp"><div><input id="ci" placeholder="Search sections…" aria-label="Search"><span id="cl"></span></div></div>
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4571f5"/><stop offset=".55" stop-color="#5b4be0"/><stop offset="1" stop-color="#b01fd0"/></linearGradient>
+<symbol id="lg" viewBox="0 0 48 48"><rect width="48" height="48" rx="15" fill="url(#gr)"/><path class="fin" d="M12 37L24 11l12 26M17.5 29h13" stroke="#fff" stroke-width="4.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="11" r="3.4" fill="#fff"/><circle cx="37" cy="11" r="6" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5"/></symbol>
+</defs></svg>
+
+<header><div class="w">
+<a href="#top" class="logo" aria-label="Aurvia home"><svg viewBox="0 0 48 48"><use href="#lg"/></svg><span>Aur<span class="gt">via</span></span></a>
+<nav id="nv"><a href="#cards">Credit Cards</a><a href="#loans">Personal Loans</a><a href="#banking">Bank Accounts</a><a href="#articles">Articles</a>
+<select class="ls" id="lg2" aria-label="Language"><option value="en">EN</option><option value="ur">اردو</option><option value="hi">हिन्दी</option><option value="ar">العربية</option></select>
+<button class="ib2" id="sb" aria-label="Search">🔍</button><button class="ib2" id="th" aria-label="Theme">🌙</button><a href="#cards" class="btn">Find My Card</a></nav>
+<button class="ib2 bgr" id="bgr" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+</div></header>
+
+<main id="top">
+<div class="hero" id="hero">
+<div class="au"><i></i><i></i><i></i></div>
+<div class="w"><div class="hg">
+<div>
+<h1>Find the right<div class="rot gt" id="rot"></div></h1>
+<h3>for your needs in the UAE.</h3>
+<p class="in">Find your options, select what fits, apply with confidence - everything you need to make the right financial decision in the UAE.</p>
+<div class="fd glass"><div class="tb" id="tb"></div><div class="go"><span id="gt">Find My Card</span><a href="#cards" class="btn" id="gb">Apply Now</a></div></div>
+</div>
+<div class="dk" id="dk">
+<div class="chip glass" style="left:-10px;top:10px">💳 5% cashback</div>
+<div class="chip glass" style="right:0;top:0;animation-delay:-2s">✅ AED 1,240 / month</div>
+<div class="chip glass" style="right:10px;bottom:70px;animation-delay:-4s">🛡️ Final approval by issuer</div>
+<div class="dots" id="dots"></div>
+</div>
+</div>
+<div class="mq"><div id="mq"></div></div>
+</div></div>
+
+<section><div class="w">
+<div class="hd c rv"><div class="ey">Explore financial products</div><h2>Everything money, in one place</h2></div>
+<div class="dock glass rv" id="dock"></div>
+</div></section>
+
+<section><div class="w">
+<div class="hd rv"><div class="ey">Get Started</div><h2>What are you looking for today?</h2></div>
+<div class="bn" id="gs"></div>
+</div></section>
+
+<section id="cards"><div class="w">
+<div class="hd rv"><div class="ey">Credit Cards</div><h2>Featured Credit Cards in UAE</h2>
+<p class="sub">Explore credit cards from leading UAE banks and compare annual fees, minimum income requirements and rewards across cashback, travel, dining and everyday spending categories.</p></div>
+<div class="fx glass rv" id="fx"><div class="stg"><div class="cc" id="ccv"></div><div class="tabs" id="tabs"></div></div><div class="dt" id="dt"></div></div>
+</div></section>
+
+<section><div class="w">
+<div class="hd c rv"><div class="ey">Explore by Preference</div><h2>Find Credit Cards Based on What Matters to You</h2>
+<p class="sub">Every UAE credit card is built around something different. Explore <a href="#cards">cashback</a> and <a href="#cards">rewards</a> cards for everyday spending, <a href="#cards">travel &amp; miles</a> cards for frequent flyers, or <a href="#cards">low-fee</a> options if keeping costs down matters most.</p></div>
+<div class="pf rv" id="pf"></div>
+</div></section>
+
+<section id="loans"><div class="w"><div class="ln">
+<div class="rv"><div class="ey">Personal Loans</div><h2>Explore Personal Loans in the UAE</h2>
+<p class="sub">Explore personal loan options from UAE banks and compare key factors such as minimum salary requirements, interest rates and repayment periods. Aurvia’s tools also cover car loan and home loan financing, so you can weigh the right type of borrowing before applying.</p>
+<div class="mini" id="mini"></div>
+<div class="row"><a href="#" class="btn l">Explore Personal Loans</a><a href="#calc" class="btn o l">Calculate EMI</a></div></div>
+<div class="cal glass rv"><span class="big">🧑‍💼</span>
+<div class="dn"><svg viewBox="0 0 140 140"><circle class="bk" cx="70" cy="70" r="54"/><circle class="fg" id="dg" cx="70" cy="70" r="54" stroke-dasharray="0 340"/></svg><div><span>Est. Monthly EMI</span><b id="ev">AED 1,240</b></div></div>
+<label>Loan amount <span id="la"></span></label><input type="range" id="ra" min="10000" max="500000" step="1000" value="63000" aria-label="Loan amount">
+<label>Tenure <span id="lt"></span></label><input type="range" id="rt" min="6" max="84" step="6" value="60" aria-label="Tenure">
+<label>Interest rate <span id="lr"></span></label><input type="range" id="rr" min="3" max="20" step=".5" value="6.5" aria-label="Interest rate"></div>
+</div></div></section>
+
+<section id="banking"><div class="w">
+<div class="hd c rv"><div class="ey">Bank Accounts</div><h2>Banking That Fits How You Manage Money</h2>
+<p class="sub">Explore business bank accounts from UAE banks and compare account fees, minimum balance requirements and everyday banking features side by side.</p></div>
+<div class="bk3">
+<div class="p glass rv"><div class="e" style="font-size:40px">💼</div><h5>Business Bank Accounts</h5><p>Explore banking options designed for companies and entrepreneurs.</p><a href="#" class="btn o">Explore Business Banking</a></div>
+<div class="pst rv"><div class="ph"><b style="font-size:13px">Bank Accounts</b><div>Total Balance<b>AED 85,430.00</b></div><div style="background:#14306e">Savings Account<b>AED 56,230.00</b></div></div></div>
+<div class="p glass rv"><h5 style="font-size:16px;margin-top:0">Suitable for:</h5><ul><li>New and existing UAE businesses</li><li>Freelancers and entrepreneurs</li><li>Teams managing daily cash flow</li></ul></div>
+</div></div></section>
+
+<section id="calc"><div class="w">
+<div class="hd rv"><div class="ey">Financial Calculators</div><h2>Make the Numbers Easier to Understand</h2>
+<p class="sub">Use Aurvia’s financial calculators to estimate loan repayments, credit card interest and debt burden ratio - practical tools that help you understand financial commitments and compare options before you apply.</p></div>
+<div class="cg" id="cg"></div>
+<div style="margin-top:28px"><a href="#" class="btn o l">View All Calculators</a></div>
+</div></section>
+
+<section><div class="w">
+<div class="hd c rv"><div class="ey">How It Works</div><h2>The <span class="gt">Aurvia</span> journey</h2></div>
+<div class="jr rv">
+<div class="glass"><big>1</big><h5><em>Find</em> your options</h5><p>Tell us your profile, preferences and what you are looking for - cashback, travel, dining, Islamic or business options.</p></div>
+<div class="glass"><big>2</big><h5><em>Select</em> what suits you</h5><p>Review options based on your profile. Understand fees, benefits and eligibility criteria before you decide.</p></div>
+<div class="glass"><big>3</big><h5><em>Apply</em> with clarity</h5><p>Submit your enquiry and continue with our authorised fulfilment partner for the next steps. Final approval is subject to issuer criteria.</p></div>
+</div></div></section>
+
+<section><div class="w">
+<div class="hd c rv"><h2 style="margin-top:0">Why People Use Aurvia</h2></div>
+<div class="wy">
+<div class="f glass tl rv"><u>📚</u><b>Explore in one place</b><p>Discover different financial product categories without jumping between multiple websites.</p></div>
+<div class="c rv">💎</div>
+<div class="f glass tl rv"><u>🧮</u><b>Useful financial tools</b><p>Use calculators and discovery tools to better understand your options.</p></div>
+<div class="f glass tl rv"><u>⚖️</u><b>Compare what matters</b><p>Review important information such as fees, income requirements, rewards and benefits.</p></div>
+<div class="f glass tl rv"><u>📍</u><b>Built for the UAE</b><p>Aurvia focuses on financial products relevant to UAE residents and businesses.</p></div>
+</div></div></section>
+
+<section id="articles"><div class="w">
+<div class="hd rv"><div class="ey">Articles &amp; Insights</div><h2>Learn Before You Apply</h2>
+<p class="sub">Read practical financial guides covering credit cards, personal loans, bank accounts and debt management - written to help UAE residents make informed decisions.</p></div>
+<div class="ag" id="ag"></div>
+</div></section>
+
+<section><div class="w fq">
+<div class="hd rv"><div class="ey">FAQ</div><h2>Frequently Asked Questions</h2></div>
+<div id="fa"></div>
+</div></section>
+
+<div class="w"><div class="cta rv"><h2>Find the right financial product in the UAE</h2><div class="row"><a href="#cards" class="btn l">Apply Now</a><a href="#cards" class="btn o l">Find My Card</a></div></div></div>
+</main>
+
+<footer><div class="w">
+<div class="fg" id="fg"></div>
+<div class="nb">
+<div class="nl"><div class="swi"><i class="fa-solid fa-water"></i></div>
+<div><h5>Join the AurWave – fun updates, zero boring stuff.</h5>
+<form class="nf" id="nf"><input type="email" placeholder="Email address" required aria-label="Email address"><button class="btn" type="submit">Subscribe</button></form></div></div>
+<div class="so"><span>Follow Aurvia on</span><div class="si">
+<a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a><a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+</div>
+<div class="bm"><div><p style="margin-bottom:4px">*Made with 💙 in UAE*</p><p>© 2026 Aurvia Marketing Management LLC SOC. All rights reserved.</p></div><div><span>v1.0.2</span></div></div>
+</div><div class="wm">Aurvia</div></footer>
+<button id="up" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],H=(el,a)=>$(el).innerHTML=a.join("");
+const R=document.documentElement,fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+/* theme + menu + loader */
+let t0;try{t0=localStorage.getItem("av-theme")}catch(e){}
+const setT=t=>{R.dataset.theme=t;$("#th").textContent=t=="dark"?"☀️":"🌙";try{localStorage.setItem("av-theme",t)}catch(e){}};
+setT(t0||"dark");$("#th").onclick=()=>setT(R.dataset.theme=="dark"?"light":"dark");
+$("#bgr").onclick=()=>$("#nv").classList.toggle("o");$$("nav a").forEach(a=>a.addEventListener("click",()=>$("#nv").classList.remove("o")));
+addEventListener("pointerdown",e=>{if(!e.target.closest("header"))$("#nv").classList.remove("o")});
+addEventListener("load",()=>setTimeout(()=>$("#ld").classList.add("x"),400));
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("v");setTimeout(()=>t.classList.remove("v"),2600)};
+
+/* rotating headline */
+const words=["Credit Card","Personal Loan","Car Loan","Home Loan","Bank Account"];
+$("#rot").innerHTML=words.map((w,i)=>`<span class="${i?"":"on"}">${w}</span>`).join("");
+let wi=0;const ws=$$(".rot span");
+setInterval(()=>{const o=ws[wi];o.className="out";wi=(wi+1)%ws.length;ws[wi].style.transition="none";ws[wi].className="";void ws[wi].offsetWidth;ws[wi].style.transition="";ws[wi].className="on";setTimeout(()=>o.className="",800)},2600);
+
+/* finder tabs */
+const fT=[["Credit Cards","#cards","Find My Card"],["Personal Loans","#loans","Compare Now"],["Bank Accounts","#banking","Explore Accounts"]];
+H("#tb",fT.map((t,i)=>`<button class="${i?"":"on"}" data-i="${i}">${t[0]}</button>`));
+$("#tb").onclick=e=>{const i=e.target.dataset.i;if(i==null)return;$$("#tb button").forEach((b,j)=>b.classList.toggle("on",j==i));$("#gt").textContent=fT[i][2];$("#gb").href=fT[i][1]};
+
+/* promo deck */
+const sl=[
+["linear-gradient(135deg,#eef3ff,#cfdcff)","#10224d","Citi <b style='color:#10224d'>Credit Cards</b>","Explore benefits, rewards &amp; more","Apply Now","💳"],
+["linear-gradient(135deg,#1e3a8a,#4571f5)","#fff","Find the Right <b>Bank Account</b>","Compare personal &amp; business accounts from UAE banks","Explore Accounts","🏦"],
+["linear-gradient(135deg,#5b21b6,#a21caf)","#fff","Compare <b>Personal Loans</b>","Check salary, rates and tenure before you apply","Compare Now","🧮"],
+["linear-gradient(135deg,#0f766e,#16a34a)","#fff","Loans for <b>Every Goal</b>","Explore Personal, Auto &amp; Home Loan offers from Top UAE banks - <i>all in one place!</i>","Apply Now &gt;","💵"]];
+$("#dk").insertAdjacentHTML("afterbegin",sl.map(s=>`<div class="dc" style="background:${s[0]};color:${s[1]}"><h4>${s[2]}</h4><small>${s[3]}</small><span class="pill">${s[4]}</span><span class="em">${s[5]}</span></div>`).join(""));
+$("#dots").innerHTML=sl.map((_,i)=>`<i data-i="${i}"></i>`).join("");
+const dc=$$(".dc");let si=0,tm;
+const go=n=>{si=(n+sl.length)%sl.length;dc.forEach((d,i)=>{const o=(i-si+sl.length)%sl.length;d.style.transform=`translate(${o*34}px,${o*-26}px) scale(${1-o*.07})`;d.style.zIndex=9-o;d.style.opacity=o>2?0:1-o*.18;d.style.filter=o?`brightness(${1-o*.18})`:"none"});$$("#dots i").forEach((d,i)=>{d.classList.remove("on");if(i==si){void d.offsetWidth;d.classList.add("on")}})};
+const auto=()=>{clearInterval(tm);tm=setInterval(()=>go(si+1),4500)};
+dc.forEach(d=>d.onclick=()=>{go(si+1);auto()});$("#dots").onclick=e=>{if(e.target.dataset.i){go(+e.target.dataset.i);auto()}};go(0);auto();
+
+/* data */
+const prods=[["💳","Credit Cards","Compare cards based on how you spend"],["💵","Personal Loans","Explore personal financing options"],["🚗","Car Loans","Finance your next vehicle"],["🏠","Home Loans","Explore mortgage options"],["🔐","Bank Accounts","Personal banking options"],["💼","Business Banking","Banking solutions for businesses"],["🧮","Calculators","Estimate EMIs, interest and DBR"]];
+H("#dock",prods.map(p=>`<a href="#" class="dk2"><div class="ic">${p[0]}</div><b>${p[1]}</b><span>${p[2]}</span></a>`));
+$("#mq").innerHTML=[...prods,...prods].map(p=>`<span>${p[1]}</span>`).join("");
+const gs=[["💳","Find a Credit Card","Compare cards based on income, spending and preferences."],["💵","Explore Personal Loans","Understand loan options and repayments."],["🔐","Find a Bank Account","Explore personal and business banking options."],["🧮","Use Financial Calculators","Estimate EMIs, interest and debt burden ratio."]];
+H("#gs",gs.map(g=>`<div class="t glass tl rv"><div class="e">${g[0]}</div><h5>${g[1]}</h5><p>${g[2]}</p><a href="#" class="lk">Know More</a></div>`));
+const fc=[["linear-gradient(135deg,#a8adb3,#4d5258)","Citi Premier","Travel &amp; Rewards","Citi Premier Credit Card","Signup for Citi Premier Credit Card and enjoy flexible rewards &amp; benefits.","15,000","AED 750","Welcome Offer","AED 350 cash back welcome offer (statement credit)","$1 = 3 points on dining, fuel &amp; grocery spend (AED)"],
+["linear-gradient(135deg,#9be3f5,#2fb4de)","FAB","Cashback","FAB Cashback Credit Card","Get up to 5% cashback on dining, fashion and supermarkets, plus 3% on eligible...","AED 5,000+","AED 300","Welcome Offer","Up to AED 1,000 cashback every month","5% cashback on eligible supermarket spending, credited as 17 FAB Rewards p..."],
+["linear-gradient(135deg,#454553,#14141a)","FAB Elite","Everyday Rewards","FAB Elite Credit Card","Earn premium FAB Rewards and enjoy beach clubs, dining, concierge, lounge...","AED 40,000","AED 1,200","No Annual Membership Offer","First year free","Earn 20 FAB Rewards per AED 1 on eligible luxury-brand spending."],
+["linear-gradient(135deg,#2b8cee,#0a4bb0)","Cash Back","Cashback","Citi Cash Back Credit Card","Enjoy automatic cash back on all purchases with Citi Cash Back Credit...","AED 8,000","AED 300","No Annual Membership Offer","No AMF for year 1","3% on non-AED spend"]];
+H("#tabs",fc.map((c,i)=>`<button data-i="${i}" class="${i?"":"on"}">${c[1]}</button>`));
+const showC=i=>{const c=fc[i];$$("#tabs button").forEach((b,j)=>b.classList.toggle("on",j==i));
+$("#ccv").style.background=c[0];$("#ccv").innerHTML=`<em>${c[1]}</em><s>•••• •••• •••• 2026</s><i></i>`;
+$("#dt").innerHTML=`<span class="cat">${c[2]}</span><h3>${c[3]}</h3><div class="d">${c[4]}</div><div class="st"><div>Minimum salary<b>${c[5]}</b></div><div>Annual fee<b>${c[6]}</b></div></div><div class="of">${c[7]}<b>${c[8]}</b></div><div class="kr">Key reward<span>${c[9]}</span></div><div class="row"><a href="#" class="btn o">View Details</a><a href="#" class="btn">Apply Now</a></div>`};
+$("#tabs").onclick=e=>{if(e.target.dataset.i!=null){showC(+e.target.dataset.i);clearInterval(ctm)}};showC(0);
+let ci0=0;const ctm=setInterval(()=>{ci0=(ci0+1)%fc.length;showC(ci0)},7000);
+const pf=[["💰","Cashback"],["✈️","Travel"],["🎁","Rewards"],["🏷️","Zero / Low Fee"],["👑","Premium"],["🔄","Balance Transfer"],["🕌","Islamic"],["💼","Business"]];
+H("#pf",pf.map(p=>`<a href="#cards"><span>${p[0]}</span>${p[1]}</a>`));
+const mini=[["✅","Compare Personal Loans","Explore available financing options."],["🛡️","Understand Eligibility","Common income &amp; document requirements."],["🧮","Calculate EMI","Estimate your monthly repayment."],["🚗","Car &amp; Home Loans","Explore vehicle &amp; mortgage financing."]];
+H("#mini",mini.map(m=>`<div class="mc"><u>${m[0]}</u><div><b>${m[1]}</b><span>${m[2]}</span></div></div>`));
+const cg=[["👛","Personal Loan EMI Calculator","Estimate monthly repayments"],["🚗","Car Loan EMI Calculator","Compare auto financing options"],["🏠","Mortgage Calculator","Plan your home financing"],["💳","Credit Card Minimum Payment","Understand minimum due"],["％","Credit Card Interest Calculator","Estimate finance charges"],["⚖️","DBR Calculator","Estimate your debt burden ratio"]];
+H("#cg",cg.map(c=>`<a href="#" class="cl glass tl rv"><u>${c[0]}</u><b>${c[1]}</b><span>${c[2]}</span></a>`));
+const ag=[["linear-gradient(135deg,#bfe3f7,#f5e3c3)","🧑‍💼","Personal Loans","Personal Loans in UAE: What to Compare Before You Sign","A low monthly instalment does not automatically mean a cheaper personal loan. Compare the total cost, tenure, fees and repayment terms before signing."],
+["linear-gradient(135deg,#efe6fb,#d9e4f8)","📱","Financial Tips","How to Maintain a Good AECB Credit Score in the UAE: Updated 2026 Guide","Learn how to maintain your UAE credit score, understand the new AECB Credit Score 3i ranges and quality ratings, and build top practical credit-health habits."],
+["linear-gradient(135deg,#cfe8f7,#dcefd3)","🌆","Credit Cards","Credit Cards on AED 3,500 Salary in UAE: What to Know","Earning AED 3,500 puts you below the standard UAE income threshold for normal credit card issuance. Here is what that means and what alternatives may exist."]];
+H("#ag",ag.map(a=>`<a href="#" class="ar2 glass rv"><div class="ai" style="background:${a[0]}">${a[1]}</div><div class="ab"><span class="tg">${a[2]}</span><h5>${a[3]}</h5><p>${a[4]}</p></div></a>`));
+const fa=[["What is Aurvia?","Aurvia is a financial product discovery platform that helps UAE residents explore and compare credit cards, loans, bank accounts and calculators in one place."],["What financial products can I explore on Aurvia?","You can explore credit cards, personal loans, car loans, home loans, bank accounts, business banking and financial calculators."],["Can I compare credit cards on Aurvia?","Yes. You can compare cards by annual fee, minimum salary, rewards, cashback and welcome offers."],["How does Find My Card work?","Tell us your profile and preferences, and Find My Card shows the options that best match what you are looking for."],["What should I consider before applying for a credit card?","Review the annual fee, minimum income, interest rates, rewards and eligibility criteria so the card fits your spending."],["Can I explore loans and bank accounts on Aurvia?","Yes. Aurvia covers personal, car and home loans as well as personal and business bank accounts."],["What financial calculators are available on Aurvia?","EMI calculators for personal and car loans, a mortgage calculator, credit card minimum payment and interest calculators, and a DBR calculator."],["Does using Aurvia guarantee that my application will be approved?","No. Final approval is always subject to the issuing bank’s own criteria."],["Does Aurvia issue credit cards, loans or bank accounts?","No. Aurvia helps you discover and compare products. They are issued by the partner banks and institutions."],["Can product fees, rates, benefits and eligibility requirements change?","Yes. Banks may update fees, rates, benefits and eligibility at any time, so please confirm the latest details before applying."]];
+H("#fa",fa.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`));
+const fg=[["Products",["Credit Cards in UAE","Personal Loans in UAE","Car Loans in UAE","Home Loans in UAE","Business Loans in UAE","Bank Accounts in UAE"]],["Tools &amp; Calculators",["Find My Card","Financial Calculators","Personal Loan EMI Calculator","Auto Loan Calculator","Mortgage Calculator","Currency Converter","Gold Rate in UAE","Silver Rate in UAE"]],["Learn",["Financial Glossary","Articles"]],["Company",["Home","About Aurvia"]],["Support",["Contact Us","Help Center","Legal &amp; Admin Policies"]]];
+H("#fg",fg.map(c=>`<div><h6>${c[0]}</h6>${c[1].map(l=>`<a href="#">${l}</a>`).join("")}</div>`));
+
+/* EMI + donut + count tween */
+const fmt=n=>Math.round(n).toLocaleString("en-US");let cur=0;
+const tween=(to)=>{const f=cur,t0=performance.now();const s=n=>{const k=Math.min(1,(n-t0)/500);cur=f+(to-f)*(1-Math.pow(1-k,3));$("#ev").textContent="AED "+fmt(cur);if(k<1)requestAnimationFrame(s)};requestAnimationFrame(s)};
+const emi=()=>{const P=+$("#ra").value,n=+$("#rt").value,r=+$("#rr").value/1200,e=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+tween(e);$("#la").textContent="AED "+fmt(P);$("#lt").textContent=n+" months";$("#lr").textContent=$("#rr").value+"%";$("#dg").setAttribute("stroke-dasharray",(P/(e*n)*339.3)+" 340")};
+["#ra","#rt","#rr"].forEach(s=>$(s).addEventListener("input",emi));emi();
+
+/* scroll */
+addEventListener("scroll",()=>{const y=scrollY,h=R.scrollHeight-innerHeight;$("#pb").style.width=(h>0?y/h*100:0)+"%";$("#up").classList.toggle("v",y>700)},{passive:true});
+$("#up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.1});
+$$(".rv").forEach((el,i)=>{el.style.setProperty("--i",i%4);io.observe(el)});
+
+/* interactions (mouse devices) */
+if(fine){
+ document.addEventListener("pointermove",e=>{$("#cur").style.left=e.clientX+"px";$("#cur").style.top=e.clientY+"px"});
+ $$(".tl").forEach(t=>{t.addEventListener("pointermove",e=>{const b=t.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;t.style.setProperty("--mx",x+"px");t.style.setProperty("--my",y+"px");t.style.setProperty("--ry",((x/b.width-.5)*7)+"deg");t.style.setProperty("--rx",((.5-y/b.height)*7)+"deg")});t.addEventListener("pointerleave",()=>{t.style.setProperty("--rx","0deg");t.style.setProperty("--ry","0deg")})});
+ $$(".btn").forEach(b=>{b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.16}px,${(e.clientY-r.top-r.height/2)*.26}px)`});b.addEventListener("pointerleave",()=>b.style.transform="")});
+ const dk=$("#dock"),it=$$(".dk2");dk.addEventListener("pointermove",e=>it.forEach(i=>{const b=i.getBoundingClientRect(),d=Math.abs(e.clientX-(b.left+b.width/2));i.style.transform=`scale(${1+.28*Math.max(0,1-d/220)}) translateY(${-14*Math.max(0,1-d/220)}px)`}));
+ dk.addEventListener("pointerleave",()=>it.forEach(i=>i.style.transform=""));
+}else $("#cur").style.display="none";
+$("#nf").onsubmit=e=>{e.preventDefault();e.target.reset();toast("Subscribed ✓ Welcome to the AurWave")};
+
+/* search palette */
+const secs=[["Credit Cards","#cards"],["Personal Loans","#loans"],["Bank Accounts","#banking"],["Calculators","#calc"],["Articles","#articles"],["FAQ","#fa"]],cp=$("#cp"),ci=$("#ci");
+const draw=()=>{const q=ci.value.toLowerCase();$("#cl").innerHTML=secs.filter(x=>x[0].toLowerCase().includes(q)).map((x,i)=>`<a href="${x[1]}" class="${i?"":"f"}">${x[0]}</a>`).join("")};
+const op=o=>{cp.classList.toggle("o",o);if(o){ci.value="";draw();ci.focus()}};
+$("#sb").onclick=()=>op(true);cp.onclick=e=>{if(e.target==cp||e.target.tagName=="A")op(false)};ci.oninput=draw;
+addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key=="k"){e.preventDefault();op(true)}if(e.key=="Escape")op(false);if(e.key=="Enter"&&cp.classList.contains("o")){const a=$("#cl a");if(a){location.hash=a.getAttribute("href");op(false)}}});
+
+/* languages: [en, ur, hi, ar] */
+const T=[["Credit Cards","کریڈٹ کارڈز","क्रेडिट कार्ड","بطاقات الائتمان"],["Personal Loans","پرسنل لونز","पर्सनल लोन","القروض الشخصية"],["Bank Accounts","بینک اکاؤنٹس","बैंक खाते","الحسابات المصرفية"],["Articles","مضامین","लेख","مقالات"],["Find My Card","میرا کارڈ تلاش کریں","मेरा कार्ड खोजें","اعثر على بطاقتي"],["Find the right","درست انتخاب تلاش کریں","सही विकल्प खोजें","اعثر على الأنسب"],["for your needs in the UAE.","یو اے ای میں آپ کی ضرورت کے مطابق۔","UAE में आपकी ज़रूरत के अनुसार।","لاحتياجاتك في الإمارات."],["Apply Now","ابھی اپلائی کریں","अभी आवेदन करें","قدّم الآن"],["Explore financial products","مالی مصنوعات دیکھیں","वित्तीय उत्पाद देखें","استكشف المنتجات المالية"],["Get Started","شروع کریں","शुरू करें","ابدأ الآن"],["What are you looking for today?","آج آپ کیا تلاش کر رہے ہیں؟","आज आप क्या खोज रहे हैं?","عمّ تبحث اليوم؟"],["Featured Credit Cards in UAE","یو اے ای کے نمایاں کریڈٹ کارڈز","UAE के चुनिंदा क्रेडिट कार्ड","أبرز بطاقات الائتمان في الإمارات"],["Explore by Preference","پسند کے مطابق تلاش کریں","पसंद के अनुसार खोजें","استكشف حسب تفضيلك"],["Explore Personal Loans in the UAE","یو اے ای میں پرسنل لونز دیکھیں","UAE में पर्सनल लोन देखें","استكشف القروض الشخصية في الإمارات"],["Est. Monthly EMI","متوقع ماہانہ قسط","अनुमानित मासिक EMI","القسط الشهري التقديري"],["Loan amount","قرض کی رقم","लोन राशि","مبلغ القرض"],["Tenure","مدت","अवधि","المدة"],["Interest rate","شرحِ سود","ब्याज दर","نسبة الفائدة"],["Banking That Fits How You Manage Money","ایسی بینکاری جو آپ کے انداز کے مطابق ہو","ऐसी बैंकिंग जो आपके तरीके के अनुसार हो","خدمات مصرفية تناسب إدارتك لأموالك"],["Financial Calculators","فنانشل کیلکولیٹرز","फाइनेंशियल कैलकुलेटर","الحاسبات المالية"],["Make the Numbers Easier to Understand","اعداد و شمار کو سمجھنا آسان بنائیں","आंकड़ों को समझना आसान बनाएँ","اجعل الأرقام أسهل فهمًا"],["How It Works","یہ کیسے کام کرتا ہے","यह कैसे काम करता है","كيف يعمل"],["Why People Use Aurvia","لوگ Aurvia کیوں استعمال کرتے ہیں","लोग Aurvia क्यों चुनते हैं","لماذا يستخدم الناس Aurvia"],["Learn Before You Apply","اپلائی سے پہلے جانیں","आवेदन से पहले जानें","تعلّم قبل أن تقدّم"],["Frequently Asked Questions","اکثر پوچھے گئے سوالات","अक्सर पूछे जाने वाले प्रश्न","الأسئلة الشائعة"],["View Details","تفصیل دیکھیں","विवरण देखें","عرض التفاصيل"],["Subscribe","سبسکرائب","सब्सक्राइब","اشترك"],["Know More","مزید جانیں","और जानें","اعرف المزيد"],["Calculate EMI","قسط معلوم کریں","EMI निकालें","احسب القسط"],["Explore Personal Loans","پرسنل لونز دیکھیں","पर्सनल लोन देखें","استكشف القروض الشخصية"],["View All Calculators","تمام کیلکولیٹرز دیکھیں","सभी कैलकुलेटर देखें","عرض كل الحاسبات"],["Products","مصنوعات","उत्पाद","المنتجات"],["Learn","سیکھیں","सीखें","تعلّم"],["Company","کمپنی","कंपनी","الشركة"],["Support","سپورٹ","सहायता","الدعم"],["Credit Card","کریڈٹ کارڈ","क्रेडिट कार्ड","بطاقة ائتمان"],["Personal Loan","پرسنل لون","पर्सनल लोन","قرض شخصي"],["Car Loan","کار لون","कार लोन","قرض سيارة"],["Home Loan","ہوم لون","होम लोन","قرض منزل"],["Bank Account","بینک اکاؤنٹ","बैंक खाता","حساب مصرفي"]];
+const nodes=[],tw=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(tw.nextNode()){const n=tw.currentNode,t=n.nodeValue.trim();if(!t||/^(SCRIPT|STYLE)$/.test(n.parentNode.tagName))continue;const r=T.find(x=>x[0]==t);if(r)nodes.push([n,n.nodeValue,t,r])}
+const setL=l=>{const k=["en","ur","hi","ar"].indexOf(l);nodes.forEach(([n,f,t,r])=>n.nodeValue=k?f.replace(t,r[k]):f);R.lang=l;R.dir=l=="ur"||l=="ar"?"rtl":"ltr";try{localStorage.setItem("av-lang",l)}catch(e){}$("#lg2").value=l};
+$("#lg2").onchange=e=>setL(e.target.value);
+let l0="en";try{l0=localStorage.getItem("av-lang")||"en"}catch(e){}if(l0!="en")setL(l0);
+</script>
+</body>
+</html>
